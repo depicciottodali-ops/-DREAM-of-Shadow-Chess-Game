@@ -556,3 +556,6 @@ Custom piece artwork belongs in `assets/` — any PNG placed there is automatica
 ---
 
 *"The board is set. The shadows gather. Make your move."*
+<img width="2018" height="1914" alt="Game D esign" src="https://github.com/user-attachments/assets/52278644-0846-4e45-b760-4531cc6a8858" />
+
+
