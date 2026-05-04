@@ -15,6 +15,8 @@ Play at: **[http://127.0.0.1:5000](http://127.0.0.1:5000)**
 ---
 
 ## Game Concept
+<img width="2634" height="1828" alt="draft 1 fantasy chess game," src="https://github.com/user-attachments/assets/86dd0645-2e22-4d3f-8cae-4bff64bffeda" />
+
 
 Every game is a **Duel**. Every save is **Archived**. The board is **the Realm**.
 
@@ -59,6 +61,8 @@ The game uses **standard chess rules** enforced by the `python-chess` library on
 | Black army pieces | `#181818` |
 
 ### Piece Design Language
+<img width="1865" height="1930" alt="draft 2 fantasy chess game," src="https://github.com/user-attachments/assets/a5b5c156-9b41-48dd-a83c-e6d001aca821" />
+
 
 Each piece follows a consistent crusader silhouette template built with SVG `evenodd` fill rules to cut visor slits, cross emblems, and crown spikes directly into the shape:
 
@@ -218,6 +222,7 @@ Every design decision was reviewed, directed, and tested by the project owner. T
 - `pip` (bundled with Python)
 
 ### Setup
+<img width="1506" height="1045" alt="draft 3 fantasy chess game," src="https://github.com/user-attachments/assets/c85ff9a1-ab9b-46d3-940a-f0e76f7e9093" />
 
 ```bash
 # 1. Clone the repository
