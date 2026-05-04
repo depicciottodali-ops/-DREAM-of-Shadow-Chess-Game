@@ -293,6 +293,9 @@ Move submission uses UCI notation (e.g. `{ "uci": "e2e4" }`).
 ---
 
 ## Future Improvements
+<img width="1254" height="1254" alt="king" src="https://github.com/user-attachments/assets/ba39b03b-70b1-4d01-8ae9-e409d1e20dcf" /><img width="1254" height="1254" alt="queen" src="https://github.com/user-attachments/assets/d7142250-542f-4585-a359-f11e5a59b6f4" />
+
+
 
 - [ ] AI difficulty levels — random → greedy material capture → minimax with alpha-beta pruning
 - [ ] Player vs Player mode (same device, hot-seat)
@@ -357,6 +360,8 @@ The game is built on standard chess rules (powered by the `python-chess` engine)
 ---
 
 ## Visual Style
+<img width="1448" height="1086" alt="players design" src="https://github.com/user-attachments/assets/7e329c25-745e-4f20-875c-747638bc41fb" />
+
 
 | Element | Description |
 |---|---|
