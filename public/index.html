@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DREAM of Shadow Chess</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- ========================================================= HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="site-title">⚔ DREAM of Shadow Chess ⚔</h1>
+      <p class="site-subtitle">A Nordic Gothic Fantasy Duel upon the Realm</p>
+    </div>
+  </header>
+
+  <!-- ========================================================= MAIN -->
+  <main class="main-layout">
+
+    <!-- -------- LEFT PANEL: controls & archive -------- -->
+    <aside class="side-panel left-panel">
+
+      <section class="panel-section">
+        <h2 class="panel-heading">⚔ New Duel</h2>
+        <label class="form-label" for="playerName">Your Name, Wanderer</label>
+        <input id="playerName" class="form-input" type="text" placeholder="Wanderer" maxlength="40" />
+        <button id="btnNewGame" class="btn btn-primary">Begin Duel</button>
+      </section>
+
+      <section class="panel-section">
+        <h2 class="panel-heading">📜 The Archive</h2>
+        <button id="btnShowArchive" class="btn btn-secondary">Open Archive</button>
+        <ul id="archiveList" class="archive-list hidden"></ul>
+      </section>
+
+    </aside>
+
+    <!-- -------- CENTER: realm (board) -------- -->
+    <section class="realm-section">
+      <div id="gameStatus" class="game-status hidden"></div>
+
+      <div class="realm-wrapper">
+        <!-- rank labels left -->
+        <div class="rank-labels" id="rankLabels"></div>
+
+        <!-- board -->
+        <div id="board" class="board"></div>
+      </div>
+
+      <!-- file labels below -->
+      <div class="file-labels" id="fileLabels"></div>
+
+      <!-- Captured pieces -->
+      <div class="captured-row">
+        <span class="captured-label">White captured:</span>
+        <span id="capturedByWhite" class="captured-pieces"></span>
+      </div>
+      <div class="captured-row">
+        <span class="captured-label">Dark Engine captured:</span>
+        <span id="capturedByBlack" class="captured-pieces"></span>
+      </div>
+
+      <!-- Move controls -->
+      <div class="duel-controls hidden" id="duelControls">
+        <button id="btnArchiveDuel" class="btn btn-danger">Send to Archive</button>
+      </div>
+    </section>
+
+    <!-- -------- RIGHT PANEL: move log -------- -->
+    <aside class="side-panel right-panel">
+      <section class="panel-section">
+        <h2 class="panel-heading">📖 Chronicle of Moves</h2>
+        <div id="moveLog" class="move-log"></div>
+      </section>
+
+      <section class="panel-section">
+        <h2 class="panel-heading">🌑 Dark Engine</h2>
+        <p class="engine-desc">
+          The Dark Engine commands the obsidian army. It hungers for
+          captures, and when no blood is to be shed, moves with capricious will.
+        </p>
+        <div id="engineLastMove" class="engine-last-move"></div>
+      </section>
+    </aside>
+
+  </main>
+
+  <!-- ========================================================= FOOTER -->
+  <footer class="site-footer">
+    <p>DREAM of Shadow Chess &copy; 2024 &mdash; Built with AI assistance &mdash; Python · Flask · python-chess · SQLite</p>
+  </footer>
+
+  <!-- Promotion modal -->
+  <div id="promoModal" class="modal hidden">
+    <div class="modal-content">
+      <h3 class="modal-title">⚜ A pawn reaches the end of the Realm ⚜</h3>
+      <p>Choose the piece your pawn shall become:</p>
+      <div class="promo-choices">
+        <button class="btn btn-promo" data-piece="q">♛ Queen</button>
+        <button class="btn btn-promo" data-piece="r">♜ Rook</button>
+        <button class="btn btn-promo" data-piece="b">♝ Bishop</button>
+        <button class="btn btn-promo" data-piece="n">♞ Knight</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/game.js"></script>
+</body>
+</html>
