@@ -157,6 +157,7 @@ def make_move(game_id: int):
             "engine_move": engine_move_info,
             "fen": board.fen(),
             "status": status,
+            "in_check": board.is_check(),
         }
     )
 
@@ -197,4 +198,5 @@ def _board_status(board: chess.Board) -> str:
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    debug = os.environ.get("FLASK_DEBUG", "0") == "1"
+    app.run(host="127.0.0.1", port=5000, debug=debug)

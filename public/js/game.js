@@ -38,6 +38,7 @@ const state = {
   capturedByBlack:[],
   playerName:     "Wanderer",
   isWhiteTurn:    true,
+  kingInCheck:    false,
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -118,7 +119,7 @@ function isBlackPiece(p) { return p && p === p.toLowerCase(); }
  * This is a simplified set used purely for UI highlighting – the server
  * validates the actual legality.
  */
-function getPseudoLegalTargets(boardArr, from) {
+function getPseudoLegalTargets(boardArr, from, fen) {
   const idx = squareToIndex(from);
   const piece = boardArr[idx];
   if (!piece) return [];
@@ -192,14 +193,16 @@ function getPseudoLegalTargets(boardArr, from) {
       if (r < 0 || r > 7 || f < 0 || f > 7) continue;
       add(r * 8 + f);
     }
-    // Castling hints (simplified)
+    // Castling hints: only suggest if FEN castling rights include the right
+    // and the squares between king and rook are empty.
+    const castlingRights = fen ? fen.split(" ")[2] : "-";
     if (white && rankN === 7 && fileN === 4) {
-      if (!boardArr[63] || boardArr[63] === "R") targets.push("g1");
-      if (!boardArr[56] || boardArr[56] === "R") targets.push("c1");
+      if (castlingRights.includes("K") && !boardArr[61] && !boardArr[62]) targets.push("g1");
+      if (castlingRights.includes("Q") && !boardArr[57] && !boardArr[58] && !boardArr[59]) targets.push("c1");
     }
     if (!white && rankN === 0 && fileN === 4) {
-      targets.push("g8");
-      targets.push("c8");
+      if (castlingRights.includes("k") && !boardArr[5] && !boardArr[6]) targets.push("g8");
+      if (castlingRights.includes("q") && !boardArr[1] && !boardArr[2] && !boardArr[3]) targets.push("c8");
     }
   }
 
@@ -259,12 +262,12 @@ function renderBoard() {
       if (boardArr[i]) cell.classList.add("occupied");
     }
 
-    // King-in-check highlight
+    // King-in-check highlight: use status flag returned by the server
     const piece = boardArr[i];
     if (piece) {
-      // Check if king is in check (simple FEN-based heuristic)
-      if ((piece === "K" && isKingInCheck(state.fen, "w")) ||
-          (piece === "k" && isKingInCheck(state.fen, "b"))) {
+      const inCheckColour = state.status === "active" && state.fen && fenTurn(state.fen);
+      if ((piece === "K" && inCheckColour === "w" && state.kingInCheck) ||
+          (piece === "k" && inCheckColour === "b" && state.kingInCheck)) {
         cell.classList.add("in-check");
       }
       const pieceEl = document.createElement("span");
@@ -276,16 +279,6 @@ function renderBoard() {
     cell.addEventListener("click", onSquareClick);
     boardEl.appendChild(cell);
   }
-}
-
-/**
- * Very rough check detection: scans if the FEN's active side's king is
- * targeted. (True legality is server-validated; this is UI only.)
- */
-function isKingInCheck(fen, colour) {
-  // We rely on the FEN status coming back from the server;
-  // simply return false here for UI purposes – we use the status string instead.
-  return false;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -306,7 +299,7 @@ function onSquareClick(e) {
     // Select a white piece
     if (piece && isWhitePiece(piece)) {
       state.selectedSquare = sq;
-      state.legalTargets = getPseudoLegalTargets(boardArr, sq);
+      state.legalTargets = getPseudoLegalTargets(boardArr, sq, state.fen);
       renderBoard();
     }
     return;
@@ -324,7 +317,7 @@ function onSquareClick(e) {
   if (piece && isWhitePiece(piece)) {
     // Re-select another white piece
     state.selectedSquare = sq;
-    state.legalTargets = getPseudoLegalTargets(boardArr, sq);
+    state.legalTargets = getPseudoLegalTargets(boardArr, sq, state.fen);
     renderBoard();
     return;
   }
@@ -418,6 +411,7 @@ async function submitMove(uci) {
 
   state.fen = data.fen;
   state.status = data.status;
+  state.kingInCheck = !!data.in_check;
 
   // Append to move log
   appendMoveLog(data);
@@ -564,6 +558,7 @@ async function loadArchivedDuel(gameId) {
   state.lastMoveFrom = null;
   state.lastMoveTo = null;
   state.isWhiteTurn = false; // archived – read only
+  state.kingInCheck = false;
 
   // Rebuild move log
   const moves = data.moves;
@@ -621,6 +616,7 @@ function wireUI() {
     state.lastMoveFrom   = null;
     state.lastMoveTo     = null;
     state.isWhiteTurn    = true;
+    state.kingInCheck    = false;
     dom.engineLastMove().textContent = "";
     dom.capturedWhite().textContent  = "";
     dom.capturedBlack().textContent  = "";
