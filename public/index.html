@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DREAM of Shadow Chess Game</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <main class="layout">
+      <section class="board-panel card">
+        <header class="title-block">
+          <h1>DREAM of Shadow Chess Game</h1>
+          <p class="subtitle">A gothic duel of stone, steel, and whispered prophecy.</p>
+        </header>
+
+        <div class="status-bar">
+          <strong>Status</strong>
+          <span id="status-text">Forge or summon a duel to begin.</span>
+        </div>
+
+        <div id="board" class="board" aria-label="Chessboard"></div>
+
+        <div class="captured-wrap">
+          <div>
+            <h3>White Trophies</h3>
+            <div id="captured-by-white" class="captured-line"></div>
+          </div>
+          <div>
+            <h3>Black Trophies</h3>
+            <div id="captured-by-black" class="captured-line"></div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="side-panel">
+        <section class="card controls-panel">
+          <h2>Match Controls</h2>
+          <label class="match-label" for="match-title-input">Match Name</label>
+          <input id="match-title-input" type="text" value="DREAM of Shadow Match" maxlength="60" />
+          <div class="controls-grid">
+            <button id="new-game-btn" class="btn glow">New Duel</button>
+            <button id="save-game-btn" class="btn">Archive Duel</button>
+            <button id="load-game-btn" class="btn">Summon Archive</button>
+            <button id="restart-game-btn" class="btn danger">Reset the Realm</button>
+          </div>
+        </section>
+
+        <section class="card opponent-panel">
+          <h2>Dark Engine</h2>
+          <p id="mode-label" class="opponent-state">Mode: Player vs Computer</p>
+          <p class="panel-note">White: Human</p>
+          <p class="panel-note">Black: Computer</p>
+          <p id="ai-status" class="panel-note">AI Status: Your Turn</p>
+        </section>
+
+        <section class="card">
+          <h2>Saved Matches</h2>
+          <div class="list-controls">
+            <button id="refresh-games-btn" class="btn subtle">Refresh</button>
+          </div>
+          <div id="games-list" class="games-list"></div>
+        </section>
+
+        <section class="card history-panel">
+          <h2>Move Chronicle</h2>
+          <ol id="move-history" class="move-history"></ol>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>
