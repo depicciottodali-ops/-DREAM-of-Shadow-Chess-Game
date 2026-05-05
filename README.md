@@ -1,5 +1,9 @@
 # DREAM of Shadow Chess Game
 > *The board is a battlefield. The Realm is eternal. The Dark Engine never sleeps.*
+> A short demo video is included to show the gameplay, user interface, dark fantasy visual style, and Human vs Dark Engine chess flow.
+> [player.html](https://github.com/user-attachments/files/27395496/player.html)
+[fantasy_chess_demo.webm](https://github.com/user-attachments/assets/e09a6270-2a88-4e0a-85fe-0e6266e11452)
+
 
 **A Nordic gothic fantasy chess web game built with AI-assisted development using Python, Flask, SQLite, JavaScript, and python-chess. Step into the Realm — command the White army, face the Dark Engine, and forge your legend one Duel at a time.**
 
