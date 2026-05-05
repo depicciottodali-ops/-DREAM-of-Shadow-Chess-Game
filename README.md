@@ -10,7 +10,6 @@
 
 **DREAM of Shadow Chess Game** is a browser-based, single-player dark fantasy chess game where you command the **White army** against a **computer-controlled Black army** powered by the *Dark Engine* AI. Built as a full-stack web project with a Python/Flask backend and a pure JavaScript/HTML/CSS frontend, the game runs entirely locally in your browser with no external services required.
 
-Play at: **[http://127.0.0.1:5000](http://127.0.0.1:5000)**
 
 ---
 
